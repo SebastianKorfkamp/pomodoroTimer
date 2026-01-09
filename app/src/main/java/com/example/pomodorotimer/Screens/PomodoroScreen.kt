@@ -2,6 +2,7 @@ package com.example.pomodorotimer.Screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -16,6 +17,8 @@ import com.example.pomodorotimer.Viewmodel.PomodoroViewModel
 import androidx.compose.material3.Button
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.Row
+
 
 @Composable
 fun PomodoroScreen(
@@ -36,26 +39,28 @@ fun PomodoroScreen(
             text = formatTime(timeLeft),
             fontSize = 72.sp
         )
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Spacer(modifier = Modifier.height(32.dp))
 
-        Spacer(modifier = Modifier.height(32.dp))
-
-        Button(onClick = {
-            if (isRunning) {
-                viewModel.pauseTimer()
-            } else {
-                viewModel.StartTimer()
+            Button(onClick = {
+                if (isRunning) {
+                    viewModel.pauseTimer()
+                } else {
+                    viewModel.StartTimer()
+                }
+            }) {
+                Text(text = if (isRunning) "Pause" else "Start")
             }
-        }) {
-            Text(text = if (isRunning) "Pause" else "Start")
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Button(onClick = { viewModel.resesTimer() }) {
+                Text(text = "Reset")
+            }
+
         }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(onClick = { viewModel.resesTimer() }) {
-            Text(text = "Reset")
-        }
-
-
     }
 }
 
