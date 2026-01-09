@@ -1,0 +1,67 @@
+package com.example.pomodorotimer.Screens
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.pomodorotimer.Viewmodel.PomodoroViewModel
+import androidx.compose.material3.Button
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+
+@Composable
+fun PomodoroScreen(
+    viewModel: PomodoroViewModel = viewModel()
+) {
+    // Liest den State aus dem ViewModel
+    val timeLeft by viewModel.timeLeft
+    val isRunning by viewModel.isRunning
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = formatTime(timeLeft),
+            fontSize = 72.sp
+        )
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        Button(onClick = {
+            if (isRunning) {
+                viewModel.pauseTimer()
+            } else {
+                viewModel.StartTimer()
+            }
+        }) {
+            Text(text = if (isRunning) "Pause" else "Start")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(onClick = { viewModel.resesTimer() }) {
+            Text(text = "Reset")
+        }
+
+
+    }
+}
+
+// Formatiert Sekunden zu MM:SS Format
+private fun formatTime(seconds: Int): String {
+    val minutes = seconds / 60
+    val remainingSeconds = seconds % 60
+    return String.format("%02d:%02d", minutes, remainingSeconds)
+}
