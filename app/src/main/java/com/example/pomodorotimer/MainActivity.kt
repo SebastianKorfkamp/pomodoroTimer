@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.pomodorotimer.Screens.MainNavigation
 import com.example.pomodorotimer.Screens.PomodoroScreen
 import com.example.pomodorotimer.ui.theme.PomodoroTimerTheme
 
@@ -21,7 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PomodoroTimerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    PomodoroScreen()
+                    MainNavigation()
                 }
             }
         }
