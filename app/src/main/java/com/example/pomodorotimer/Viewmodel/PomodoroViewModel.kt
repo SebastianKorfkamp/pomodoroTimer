@@ -14,7 +14,7 @@ import kotlinx.coroutines.job
 
 
 class PomodoroViewModel(
-    private val settingsViewModel: SettingsViewModel = SettingsViewModel()
+     val settingsViewModel: SettingsViewModel = SettingsViewModel()
 ) : ViewModel() {
 
 
@@ -94,7 +94,7 @@ class PomodoroViewModel(
     fun switchToNextMode() {
         _currentmode.value = when (_currentmode.value) {
            TimerMode.WORK ->  {
-               _completedPomodoros.value = +1
+               _completedPomodoros.value += 1
 
                if (_completedPomodoros.value >= 4) {
                    _completedPomodoros.value = 0

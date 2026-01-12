@@ -18,6 +18,7 @@ import androidx.compose.material3.Button
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.Row
+import androidx.compose.runtime.LaunchedEffect
 import com.example.pomodorotimer.Model.TimerMode
 
 
@@ -30,6 +31,14 @@ fun PomodoroScreen(
     val isRunning by viewModel.isRunning
     val currentMode by viewModel.currentMode
     val completedPomodoros by viewModel.completedPomodoros
+
+    LaunchedEffect(currentMode, viewModel.settingsViewModel.workDuration.value,
+        viewModel.settingsViewModel.shortBreakDuration.value,
+        viewModel.settingsViewModel.longBreakDuration.value) {
+        if (!isRunning) {
+            viewModel.resetTimer()
+        }
+    }
 
     Column(
         modifier = Modifier
