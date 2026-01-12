@@ -45,21 +45,7 @@ class PomodoroViewModel(
 
 
 
-    // Funktionen um den Timer zu steuern
-    // StartTimer - setzt is running auf true
-    // pauseTimer - setzt isRunning auf false
-    // resetTimer - Stoppt den timer und setzt die zeit zurück auf 25 minuten
 
-
-    /*
-    StartTimer() funktion
-
-    ViewmModelScope - startet eine Coroutine
-    die while schleife läuift solange der timer noch aktiv ist und zeit übrig ist
-    Delay(1000) wartet 1000 Millisekunden (1sekunde)
-    _timeLeft.value -=1 - zieht 1 sekunde ab
-
-     */
 
     fun StartTimer() {
 
