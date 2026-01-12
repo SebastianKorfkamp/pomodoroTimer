@@ -18,6 +18,7 @@ import androidx.compose.material3.Button
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.Row
+import com.example.pomodorotimer.Model.TimerMode
 
 
 @Composable
@@ -27,6 +28,8 @@ fun PomodoroScreen(
     // Liest den State aus dem ViewModel
     val timeLeft by viewModel.timeLeft
     val isRunning by viewModel.isRunning
+    val currentMode by viewModel.currentMode
+    val completedPomodoros by viewModel.completedPomodoros
 
     Column(
         modifier = Modifier
@@ -35,6 +38,23 @@ fun PomodoroScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+
+        Text(
+            text = when (currentMode) {
+                TimerMode.WORK -> "Arbeitszeit"
+                TimerMode.SHORT_BREAK -> "Kurze Pause"
+                TimerMode.LONG_BREAK -> "Lange Pause"
+            },
+            fontSize = 24.sp
+        )
+
+
+        Text(
+            text = "Pomodoro: $completedPomodoros / 4",
+            fontSize = 16.sp
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = formatTime(timeLeft),
             fontSize = 72.sp
@@ -56,7 +76,7 @@ fun PomodoroScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Button(onClick = { viewModel.resesTimer() }) {
+            Button(onClick = { viewModel.resetTimer() }) {
                 Text(text = "Reset")
             }
 
